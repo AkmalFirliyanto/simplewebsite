@@ -133,12 +133,81 @@ table {
 
 body {
     background-image: url(img/2.jpg);
+    font-family: sans-serif;
+    overflow-x: hidden;
+}
+
+nav {
+    background-color: rgb(200, 200, 200);
+    display: flex;
+    justify-content: space-around;
+    padding: 20px 0;
+}
+
+nav .brand {
+    font-size: 1.2em;
+    z-index: 1;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    width: 40%;
+    justify-content: space-between;
+    transition: 1s;
+    opacity: 1;
+}
+
+nav ul.slide {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+nav ul li a {
+    color: #000;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+
+/* menu toggle */
+
+.toggle {
+    display: none;
+    flex-direction: column;
+    height: 20px;
+    justify-content: space-between;
+    position: relative;
+}
+
+.toggle input {
+    position: absolute;
+    width: 40px;
+    height: 28px;
+    left: -10px;
+    top: -7px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.toggle span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: black;
+    border-radius: 3px;
+    transition: all 0.5s;
 }
 
 .container {
     width: 960px;
     margin: auto;
     background-color: rgb(120, 120, 120);
+    margin-top: 4rem;
+}
+
+body div.content {
+    display: flex;
 }
 
 .header {
@@ -149,12 +218,7 @@ body {
     margin-right: auto;
     font-size: 40px;
     font-weight: bold;
-}
-
-.header ul li {
-    display: inline-block;
-    margin-right: 15px;
-    margin-top: 20px;
+    padding-bottom: 20px;
 }
 
 .header a {
@@ -171,12 +235,10 @@ body {
     width: 600px;
     padding: 20px;
     box-sizing: border-box;
-    float: left;
 }
 
 .sidebar {
     width: 300px;
-    float: right;
     padding-top: 20px;
 }
 
@@ -186,9 +248,9 @@ body {
 
 .sidebar img {
     width: 70px;
-    float: left;
     padding-top: 5px;
     padding-right: 10px;
+    float: left;
 }
 
 .sidebar p {
@@ -239,26 +301,61 @@ footer .copy {
 }
 
 
-/* clerfix */
+/* responsive */
 
-.cf:before,
-.cf:after {
-    content: " ";
-    /* 1 */
-    display: table;
-    /* 2 */
-}
-
-.cf:after {
-    clear: both;
+@media only screen and (max-width: 768px) {
+    nav ul {
+        width: 50%;
+    }
+    .container {
+        width: 90%;
+    }
 }
 
 
-/**
- * For IE 6/7 only
- * Include this rule to trigger hasLayout and contain floats.
- */
+/* hp */
 
-.cf {
-    *zoom: 1;
+@media only screen and (max-width: 576px) {
+    nav ul {
+        position: absolute;
+        width: 80%;
+        right: 0;
+        top: 0;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        background-color: rgb(200, 200, 200);
+        transform: translateX(100%);
+    }
+    .container {
+        width: 90%;
+    }
+    .toggle {
+        display: flex;
+    }
+}
+
+
+/* animation */
+
+.toggle span:nth-child(2) {
+    transform-origin: 0 0;
+}
+
+.toggle span:nth-child(4) {
+    transform-origin: 0 100%;
+}
+
+.toggle input:checked~span:nth-child(2) {
+    transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.toggle input:checked~span:nth-child(4) {
+    transform: rotate(-45deg) translate(-1px, 0);
+}
+
+.toggle input:checked~span:nth-child(3) {
+    transform: scale(0);
+    opacity: 0;
 }
